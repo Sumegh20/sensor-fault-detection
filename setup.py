@@ -11,12 +11,8 @@ def get_requirements_list():
     with open(path_to_file) as f:
         libraries = f.readlines()
 
-    for lib in libraries:
-        if lib != '-e .' and lib != '-e .\n':
-            if lib.endswith('\n'):
-                requirement_list.append(lib[:-1])
-            else:
-                requirement_list.append(lib)
+    requirement_list = [lib.replace('\n', '') for lib in libraries]
+    requirement_list.remove('-e .')
 
     return requirement_list
 
