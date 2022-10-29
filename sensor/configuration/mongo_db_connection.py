@@ -4,7 +4,7 @@ import certifi
 ca = certifi.where()
 
 def getMongoDBURL():
-    path_to_file = '/home/cloudcraftz/test/iNeuron/mongodbURL.txt'
+    path_to_file = '/home/cloudcraftz/test/iNeuron/Industry_Ready_Project_1/mongodbURL.txt'
     with open(path_to_file) as f:
         url = f.readline()
 
