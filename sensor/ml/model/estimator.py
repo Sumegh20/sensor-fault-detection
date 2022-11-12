@@ -1,4 +1,7 @@
 
+from sensor.exception import SensorException
+import sys, os
+
 class TargetValueMapping:
     def __init__(self):
         self.neg: int = 0
@@ -15,6 +18,23 @@ class TargetValueMapping:
 #Write a code to train model and check the accuracy.
 
 class SensorModel:
+
+    def __init__(self,preprocessor,model):
+        try:
+            self.preprocessor = preprocessor
+            self.model = model
+        except Exception as e:
+            raise SensorException(e, sys)
+
+    def predict(self,x):
+        try:
+            x_transform = self.preprocessor.transform(x)
+            y_hat = self.model.predict(x_transform)
+            
+            return y_hat
+        except Exception as e:
+            raise SensorException(e, sys)
+
     def get_best_model():
         pass
 
