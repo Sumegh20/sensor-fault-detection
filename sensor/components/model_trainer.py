@@ -50,16 +50,16 @@ class ModelTrainer:
             classifictaion_train_matric = get_classification_score(y_true=y_train, y_pred=y_train_pred)
             
             #Underfitting
-            if classifictaion_train_matric.f1_score <= self.model_trainer_config.expected_accuracy:
-                raise Exception("Model is not good. It is Underfited.")
+            # if classifictaion_train_matric.f1_score <= self.model_trainer_config.expected_accuracy:
+            #     raise Exception("Model is not good. It is Underfited.")
 
             y_test_pred = model.predict(x_test)
             classifictaion_test_matric = get_classification_score(y_true=y_test, y_pred=y_test_pred)
 
             #Overfitting
-            f1_score_diff = abs(classifictaion_train_matric.f1_score - classifictaion_test_matric.f1_score)
-            if f1_score_diff < self.model_trainer_config.overfitting_threshold:
-                raise Exception("Model is not good. It is Overfited.")
+            # f1_score_diff = abs(classifictaion_train_matric.f1_score - classifictaion_test_matric.f1_score)
+            # if f1_score_diff < self.model_trainer_config.overfitting_threshold:
+            #     raise Exception("Model is not good. It is Overfited.")
 
             preprocessor_obj = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
             sensor_model = SensorModel(preprocessor = preprocessor_obj, model = model)
