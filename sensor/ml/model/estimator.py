@@ -42,7 +42,7 @@ class SensorModel:
 
 class ModelResolver:
 
-    def __init__(self, model_dir):
+    def __init__(self, model_dir=SAVE_MODEL_DIR):
         try:
             self.model_dir = model_dir
 
@@ -51,8 +51,7 @@ class ModelResolver:
 
     def get_best_model_path(self):
         try:
-            filepath_list = "/".join(self.model_dir.split("/")[:1])+"/"
-            timestamps = list(map(int, os.listdir(filepath_list)))
+            timestamps = list(map(int, os.listdir(self.model_dir)))
             latest_timestamps = max(timestamps)
             latest_model_path = os.path.join(self.model_dir, f"{latest_timestamps}", MODEL_TRAINER_TRAINED_MODEL_NAME)
 
@@ -65,9 +64,9 @@ class ModelResolver:
             if not os.path.exists(self.model_dir):
                 return False
 
-            # timestamps = os.listdir(self.model_dir)
-            # if len(timestamps) == 0:
-            #     return False
+            timestamps = os.listdir(self.model_dir)
+            if len(timestamps) == 0:
+                return False
 
             latest_model_path = self.get_best_model_path()
             if not os.path.exists(latest_model_path):

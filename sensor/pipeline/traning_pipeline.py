@@ -89,8 +89,8 @@ class TrainPipeline:
             model_evel_artifact = self.start_model_evaluation(data_validation_artifact = data_validation_artifact, model_trainer_artifact = model_trainer_artifact)
 
             if not model_evel_artifact.is_model_accepted:
-                raise Exception("Trained model is not better then the best model")
-            
-            model_pusher_artifact = self.start_model_pusher(model_evel_artifact = model_evel_artifact)
+                print("Trained model is not better then the best model")
+            else:
+                model_pusher_artifact = self.start_model_pusher(model_evel_artifact = model_evel_artifact)
         except  Exception as e:
             raise  SensorException(e,sys)
